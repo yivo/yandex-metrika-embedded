@@ -1,6 +1,5 @@
 # yandex-metrika-embedded
 
-[![Build Status](https://img.shields.io/travis/yivo/yandex-metrika-embedded/master.svg)](https://travis-ci.org/yivo/yandex-metrika-embedded)
 [![Bower](https://img.shields.io/bower/v/yandex-metrika-embedded.svg)](https://github.com/yivo/yandex-metrika-embedded)
 [![npm](https://img.shields.io/npm/v/yandex-metrika-embedded.svg)](https://www.npmjs.com/package/yandex-metrika-embedded)
 [![License](https://img.shields.io/github/license/yivo/yandex-metrika-embedded.svg)](https://github.com/yivo/yandex-metrika-embedded)
