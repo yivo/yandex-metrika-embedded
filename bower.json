@@ -1,20 +1,24 @@
 {
   "name": "yandex-metrika-embedded",
-  "homepage": "https://github.com/yivo/yandex-metrika-embedded",
+  "description": "This snippet of code automatically initializes yandex metrika with config retrieved from meta tags. Friendly with Turbolinks and pjax. Latest watch.js is included in this script.",
+  "main": "build/yandex-metrika-embedded.js",
   "authors": [
     "Yaroslav Konoplov <eahome00@gmail.com>"
   ],
-  "description": "This snippet of code automatically initializes yandex metrika with config retrieved from meta tags. Friendly with Turbolinks and pjax. Latest watch.js is included in this script.",
-  "main": "build/yandex-metrika-embedded.coffee",
   "license": "MIT",
+  "keywords": [
+    "yandex",
+    "metrika",
+    "embedded",
+    "analytics",
+    "watch.js"
+  ],
+  "homepage": "https://github.com/yivo/yandex-metrika-embedded",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
-    "tests",
-    "coffeespec",
-    "source",
-    "spec"
+    "tests"
   ]
 }

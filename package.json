@@ -1,18 +1,34 @@
 {
   "name": "yandex-metrika-embedded",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "1.0.1",
+  "description": "This snippet of code automatically initializes yandex metrika with config retrieved from meta tags. Friendly with Turbolinks and pjax. Latest watch.js is included in this script.",
+  "main": "build/yandex-metrika-embedded.js",
   "dependencies": {},
   "devDependencies": {
+    "coffee-script": "^1.12.2",
     "gulp": "^3.9.1",
-    "gulp-coffee": "^2.3.2",
-    "gulp-concat": "^2.6.0",
+    "gulp-coffee": "^2.3.3",
+    "gulp-concat": "^2.6.1",
     "gulp-replace": "^0.5.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yivo/yandex-metrika-embedded.git"
+  },
+  "keywords": [
+    "yandex",
+    "metrika",
+    "embedded",
+    "analytics",
+    "watch.js"
+  ],
+  "author": "Yaroslav Konoplov <eahome00@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yivo/yandex-metrika-embedded/issues"
+  },
+  "homepage": "https://github.com/yivo/yandex-metrika-embedded#readme"
 }
