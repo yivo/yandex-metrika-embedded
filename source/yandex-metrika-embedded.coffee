@@ -1,26 +1,24 @@
 initialize = (counterID, options) ->
   unless counterID
-    throw new Error('Yandex Metrika initializer: Counter ID is required')
+    throw new TypeError('[Yandex Metrika Initializer] Counter ID is required')
 
   metrika = null
-  create  = -> try metrika = new Ya.Metrika($.extend(id: counterID, options, defer: yes)); return
+  create  = -> try metrika = new Ya.Metrika($.extend(id: counterID, options, defer: true)); return
   hit     = -> metrika?.hit?(location.href.split('#')[0], title: document.title); return
-
+  watchJS = -> ### watch.js ###
+    
   (window.yandex_metrika_callbacks ?= []).push(create)
 
   if Turbolinks?.supported
     $(document).on('page:change', hit)
   else
     hit()
-    $(document).on('pjax:end', hit) if $.fn.pjax?
+    $(document).on('pjax:end', hit) if $.support.pjax
 
-  try `// WATCHJS`
-  return
+  watchJS()
 
 if (head = document.getElementsByTagName('head')[0])?
-  meta      = head.getElementsByTagName('meta')
-  counterID = null
-  options   = null
+  meta = head.getElementsByTagName('meta')
 
   for el in meta
     switch el.getAttribute('name')
