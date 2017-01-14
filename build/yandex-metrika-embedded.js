@@ -1,8 +1,13 @@
+
+/*!
+ * yandex-metrika-embedded 1.0.2 | https://github.com/yivo/yandex-metrika-embedded | MIT License
+ */
+
 (function() {
-  var counterID, el, head, i, initialize, json, len, meta, options;
+  var counterID, el, head, i, initialize, json, len, meta, options, watchJS;
 
   initialize = function(counterID, options) {
-    var create, hit, metrika, watchJS;
+    var create, hit, metrika;
     if (!counterID) {
       throw new TypeError('[Yandex Metrika Initializer] Counter ID is required');
     }
@@ -25,10 +30,28 @@
         }
       }
     };
-    watchJS = function() {
+    (window.yandex_metrika_callbacks != null ? window.yandex_metrika_callbacks : window.yandex_metrika_callbacks = []).push(create);
+    if (typeof Turbolinks !== "undefined" && Turbolinks !== null ? Turbolinks.supported : void 0) {
+      $(document).on('page:change', hit);
+    } else {
+      hit();
+      if ($.support.pjax) {
+        $(document).on('pjax:end', hit);
+      }
+    }
+    return watchJS();
+  };
 
-      try { // https://mc.yandex.ru/metrika/watch.js
-// Last-Modified: Tue, 10 Jan 2017 17:58:51 GMT
+  watchJS = function() {
+    try {
+      
+/*!
+ * watch.js
+ * VERSION:      Tue, 10 Jan 2017 17:58:51 GMT
+ * SOURCE:       https://mc.yandex.ru/metrika/watch.js
+ * TERMS OF USE: https://yandex.com/legal/metrica_termsofuse
+ */
+
 (function(g,h,X){function r(a,b){return function(){try{return a.apply(this,arguments)}catch(c){ta(c,b)}}}function ta(a,b){var c;if(.01>Math.random())try{(new R).log("jserrs",Y,a.message,b,D.href,"","string"==typeof a.stack&&a.stack.replace(/\n/g,"\\n"))}catch(d){c=["cp: "+b,a.name+": "+a.message,"debug: ","code: "+Y,"stack: "+a.stack],(new Image).src="//an.yandex.ru/jserr/101500?cnt-class=100&errmsg="+encodeURIComponent(c.join("; ").replace(/\r?\n/g,"\\n"))}}function ib(a,b,c){return g.setTimeout(r(a,
 c||"setTimeout"),b)}function x(){for(var a={},b="hash host hostname href pathname port protocol search".split(" "),c=b.length,d=c,e,f;d--;)a[b[d]]="";try{for(e=g.location,d=c;d--;)f=b[d],a[f]=""+e[f]}catch(n){D&&(a=D)}return a}function ua(a){return a?(""+a).replace(/^\s+/,"").replace(/\s+$/,""):""}function La(){return-1!=x().hostname.search(/(?:^|\.)(?:ya|yandex)\.(?:\w+|com\.\w+)$/)}function qa(a){return-1!==(""+g.navigator.userAgent).toLowerCase().search(a)}function Ma(a){return ua(a&&a.innerHTML&&
 a.innerHTML.replace(/<\/?[^>]+>/gi,""))}function Na(a,b){var c,d;if(!a||!b)return!1;c=[];for(d=0;d<b.length;d++)c.push(b[d].replace(/\^/g,"\\^").replace(/\$/g,"\\$").replace(/\./g,"\\.").replace(/\[/g,"\\[").replace(/\]/g,"\\]").replace(/\|/g,"\\|").replace(/\(/g,"\\(").replace(/\)/g,"\\)").replace(/\?/g,"\\?").replace(/\*/g,"\\*").replace(/\+/g,"\\+").replace(/\{/g,"\\{").replace(/\}/g,"\\}"));return(new RegExp("\\.("+c.join("|")+")$","i")).test(a)}function jb(a){a=a.target||a.srcElement;var b;if(!a)return!1;
@@ -176,18 +199,9 @@ h=f.fnv32a(e),a[h]&&!c[e]&&0<d.duration&&(c[e]={dns:Math.round(d.domainLookupEnd
 accurateTrackBounce:c._isAccurateTrackBounce,clickmap:c._clickmap&&c._clickmap._start,oldCode:!!g.ya_cid,trackHash:!!c._trackHash,trackLinks:c._trackLinks&&c._trackLinks.on,webvisor:!!c._webvisor})});return a};g.ya_cid&&new Ya.Metrika(g.ya_cid,g.ya_params,g.ya_class);g.ya_cid&&!g.ya_hit&&(g.ya_hit=function(a,b){Ya._metrika.counter&&Ya._metrika.counter.reachGoal(a,b)});(function(){var a=g.yandex_metrika_callback,b=g.yandex_metrika_callbacks,c;"function"==typeof a&&a();if("object"==typeof b)for(a=0;a<
 b.length;a++)if(c=b[a])b[a]=null,c();Ra("yandex_metrika_callback");Ra("yandex_metrika_callbacks")})();g.Ya.Metrika.informer=function(a){var b=!!Ya.Metrika._informer;Ya.Metrika._informer=a;b||m.loadScript({src:"https://informer.yandex.ru/metrika/informer.js"})};l.on(h,"click",r(function(a){var b=B.getTarget(a),c,d;b&&"ym-advanced-informer"==b.className&&(c=b.getAttribute("data-lang"),d=b.getAttribute("data-cid"),Ya.Metrika.informer({i:b,id:+d,lang:c}),B.prevent(a))},"adv-inf"),null,{passive:!1})})(this,
 this.document);
- } catch (e) {}
-    };
-    (window.yandex_metrika_callbacks != null ? window.yandex_metrika_callbacks : window.yandex_metrika_callbacks = []).push(create);
-    if (typeof Turbolinks !== "undefined" && Turbolinks !== null ? Turbolinks.supported : void 0) {
-      $(document).on('page:change', hit);
-    } else {
-      hit();
-      if ($.support.pjax) {
-        $(document).on('pjax:end', hit);
-      }
-    }
-    return watchJS();
+
+  ;
+    } catch (error) {}
   };
 
   if ((head = document.getElementsByTagName('head')[0]) != null) {

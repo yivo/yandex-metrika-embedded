@@ -1,3 +1,7 @@
+###!
+# yandex-metrika-embedded 1.0.2 | https://github.com/yivo/yandex-metrika-embedded | MIT License
+###
+  
 initialize = (counterID, options) ->
   unless counterID
     throw new TypeError('[Yandex Metrika Initializer] Counter ID is required')
@@ -5,7 +9,6 @@ initialize = (counterID, options) ->
   metrika = null
   create  = -> try metrika = new Ya.Metrika($.extend(id: counterID, options, defer: true)); return
   hit     = -> metrika?.hit?(location.href.split('#')[0], title: document.title); return
-  watchJS = -> ### watch.js ###
     
   (window.yandex_metrika_callbacks ?= []).push(create)
 
@@ -16,6 +19,12 @@ initialize = (counterID, options) ->
     $(document).on('pjax:end', hit) if $.support.pjax
 
   watchJS()
+
+watchJS = ->
+  try ```
+    /* watch.js */
+  ```
+  return # Explicit return statement
 
 if (head = document.getElementsByTagName('head')[0])?
   meta = head.getElementsByTagName('meta')
