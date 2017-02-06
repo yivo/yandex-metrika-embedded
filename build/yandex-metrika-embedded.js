@@ -1,43 +1,48 @@
 
 /*!
- * yandex-metrika-embedded 1.0.3 | https://github.com/yivo/yandex-metrika-embedded | MIT License
+ * yandex-metrika-embedded 1.0.4 | https://github.com/yivo/yandex-metrika-embedded | MIT License
  */
 
 (function() {
-  var counterID, el, head, i, initialize, json, len, meta, options, watchJS;
+  var counterID, el, head, i, initialize, json, len, meta, options, ref, watchJS;
 
   initialize = function(counterID, options) {
-    var create, hit, metrika;
+    var $document, hit, hitoptions, hiturl, init, metrika;
     if (!counterID) {
       throw new TypeError('[Yandex Metrika Initializer] Counter ID is required');
     }
     metrika = null;
-    create = function() {
-      try {
-        metrika = new Ya.Metrika($.extend({
-          id: counterID
-        }, options, {
-          defer: true
-        }));
-      } catch (error) {}
+    init = function() {
+      return metrika = new Ya.Metrika($.extend({
+        id: counterID
+      }, options, {
+        defer: true
+      }));
     };
     hit = function() {
-      if (metrika != null) {
-        if (typeof metrika.hit === "function") {
-          metrika.hit(location.href.split('#')[0], {
-            title: document.title
-          });
-        }
-      }
+      return metrika.hit(hiturl(), hitoptions());
     };
-    (window.yandex_metrika_callbacks != null ? window.yandex_metrika_callbacks : window.yandex_metrika_callbacks = []).push(create);
+    hiturl = function() {
+      return location.href.split('#')[0];
+    };
+    hitoptions = function() {
+      return {
+        title: document.title,
+        referrer: document.referrer
+      };
+    };
+    window.yandex_metrika_callbacks = [init, hit];
     if (typeof Turbolinks !== "undefined" && Turbolinks !== null ? Turbolinks.supported : void 0) {
-      $(document).on('page:change', hit);
-    } else {
-      hit();
-      if ($.support.pjax) {
-        $(document).on('pjax:end', hit);
-      }
+      $document = $(document);
+      hitoptions = function() {
+        return {
+          title: document.title,
+          referrer: Turbolinks.referrer
+        };
+      };
+      $document.one('page:change', function() {
+        return $document.on('page:change', hit);
+      });
     }
     return watchJS();
   };
@@ -215,7 +220,7 @@ a("yandex_metrika_callback");a("yandex_metrika_callbacks")})();g.Ya.Metrika.info
         case 'yandex_metrika:options':
           json = el.getAttribute('content');
           try {
-            options = (typeof JSON !== "undefined" && JSON !== null ? JSON.parse(json) : void 0) || $.parseJSON(json);
+            options = (ref = typeof JSON !== "undefined" && JSON !== null ? JSON.parse(json) : void 0) != null ? ref : $.parseJSON(json);
           } catch (error) {}
       }
     }

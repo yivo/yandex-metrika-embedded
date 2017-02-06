@@ -1,6 +1,6 @@
 {
   "name": "yandex-metrika-embedded",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "This snippet of code automatically initializes yandex metrika with config retrieved from meta tags. Friendly with Turbolinks and pjax. Latest watch.js is included in this script.",
   "main": "build/yandex-metrika-embedded.js",
   "dependencies": {},
