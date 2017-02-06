@@ -1,5 +1,5 @@
 ###!
-# yandex-metrika-embedded 1.0.2 | https://github.com/yivo/yandex-metrika-embedded | MIT License
+# yandex-metrika-embedded 1.0.3 | https://github.com/yivo/yandex-metrika-embedded | MIT License
 ###
   
 initialize = (counterID, options) ->
